@@ -55,9 +55,9 @@ const SearchComp = () => {
       gender: "Male",
     },
   ]);
-  const [search, setSearch] = useState('');
-  const [filter, setFilter] = useState('');
-  const [filteredContact, setFilteredContact] = useState(contacts)
+  const [search, setSearch] = useState("");
+  const [filtered, setFiltered] = useState("");
+  const [filteredContact, setFilteredContact] = useState(contacts);
 
   const addOpenModal = () => {
     setAddModal(true);
@@ -68,38 +68,33 @@ const SearchComp = () => {
 
   const addContact = (contact) => {
     const newContact = [...contacts, { ...contact, id: contacts.length + 1 }];
-    setContacts(
-      newContact
-    );
-    setFilteredContact(newContact)
+    setContacts(newContact);
+    setFilteredContact(newContact);
   };
   const handleSearch = (e) => {
     let text = e.target.value.toLowerCase();
     setSearch(text);
     setFilteredContact(
-            contacts.filter(
-            (e) =>
-              e.firstName.toLowerCase().includes(text) ||
-              e.lastName.toLowerCase().includes(text)
-          ),
-    )
-    setContacts(filteredContact);
+      contacts.filter(
+        (e) =>
+          e.firstName.toLowerCase().includes(text) ||
+          e.lastName.toLowerCase().includes(text)
+      )
+    );
+
+    console.log(contacts);
   };
 
   const handleFilter = (e) => {
     const gender = e.target.value;
-    setFilter(gender);
-    let filtered;
+    setFiltered(gender);
+    let filteredValue;
     if (gender == "All") {
-      filtered = contacts;
+      filteredValue = contacts;
     } else {
-      filtered = contacts.filter(
-        (contact) => contact.gender == gender
-      );
+      filteredValue = contacts.filter((contact) => contact.gender == gender);
     }
-    setFilter({
-      filteredContact: filtered,
-    });
+    setFilteredContact(filteredValue);
   };
 
   return (
@@ -116,7 +111,7 @@ const SearchComp = () => {
         <select
           id="group"
           className="form-select w-50"
-          value={filter}
+          value={filtered}
           onChange={handleFilter}
         >
           <option value="All">All</option>
