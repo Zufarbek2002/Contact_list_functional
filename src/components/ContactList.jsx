@@ -1,6 +1,6 @@
 
 
-const ContactList = ({contacts}) => {
+const ContactList = ({contacts, handleDelete}) => {
   return (
     <div className="d-flex gap-5 flex-wrap justify-content-center">
         {contacts.map((contact) => (

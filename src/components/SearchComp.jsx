@@ -81,8 +81,6 @@ const SearchComp = () => {
           e.lastName.toLowerCase().includes(text)
       )
     );
-
-    console.log(contacts);
   };
 
   const handleFilter = (e) => {
@@ -97,6 +95,13 @@ const SearchComp = () => {
     setFilteredContact(filteredValue);
   };
 
+  const handleDelete = (id) => {
+    setFilteredContact(
+      filteredContact.filter(
+        (contact) => contact.id !== id
+      )
+    )
+  };
   return (
     <div className="container">
       <div className="header py-5 d-flex gap-4">
@@ -141,7 +146,7 @@ const SearchComp = () => {
       />
       <ContactList
         contacts={filteredContact}
-        // handleDelete={handleDelete}
+        handleDelete={handleDelete}
         // handleEdit={handleEdit}
       />
       {/* <EditContact
